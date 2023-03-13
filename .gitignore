@@ -1,0 +1,7 @@
+build/
+devel/
+logs/
+.catkin_tools/
+*.code-workspace
+.vscode/
+python_ws/
