@@ -133,6 +133,19 @@ add_executable(g29mt_back_semi_master src/g29mt_back_semi_master.cpp)
 target_link_libraries(g29mt_back_semi_master
   ${catkin_LIBRARIES}
 )
+
+add_executable(ps3_back_semi src/ps3_back_semi.cpp)
+
+target_link_libraries(ps3_back_semi
+  ${catkin_LIBRARIES}
+)
+
+add_executable(ps3_nongear src/ps3_nongear.cpp)
+
+target_link_libraries(ps3_nongear
+  ${catkin_LIBRARIES}
+)
+
 ## Declare a C++ library
 # add_library(${PROJECT_NAME}
 #   src/${PROJECT_NAME}/g29mt_master.cpp

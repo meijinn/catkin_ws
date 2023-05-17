@@ -1,0 +1,9 @@
+<launch>
+  <node name="joy_node" pkg="joy" type="joy_node" />
+  <!-- <node name="g29mt_master" pkg="g29mt_master" type="g29mt_master" output="screen" /> -->
+  <node pkg="rosserial_python" type="serial_node.py" name="serial_node" respawn="true">
+  <param name="port" value="/dev/ttyUSB0" />
+  <param name="baud" value="115200" />
+  </node>
+  <node name="ps3_nongear" pkg="g29mt_master" type="ps3_nongear" output="screen" respawn="true"/>
+</launch>

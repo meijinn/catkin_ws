@@ -1,5 +1,5 @@
 <launch>
   <node name="joy_node" pkg="joy" type="joy_node" />
   <!-- <node name="g29mt_master" pkg="g29mt_master" type="g29mt_master" output="screen" /> -->
-  <node name="g29mt_back_semi_master" pkg="g29mt_master" type="g29mt_back_semi_master" output="screen" />
+  <node name="g29mt_back_semi_master" pkg="g29mt_master" type="g29mt_back_semi_master" output="screen" respawn="true"/>
 </launch>
