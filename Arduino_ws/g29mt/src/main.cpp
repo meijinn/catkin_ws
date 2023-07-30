@@ -11,7 +11,6 @@ int esc_pin = 0;
 int servo_pin = 1;
 int esc, servo;
 ros::NodeHandle nh;
-
 Adafruit_PWMServoDriver pwm = Adafruit_PWMServoDriver();
 
 void servoCb(const std_msgs::UInt16MultiArray& cmd_msg) {
@@ -23,8 +22,6 @@ void servoCb(const std_msgs::UInt16MultiArray& cmd_msg) {
     cmd_msg.data[0] = SER_NEUT;
     cmd_msg.data[1] = ESC_NEUT;
   }
-  // servo.write(cmd_msg.data[0]);
-  // speedcontroller.write(cmd_msg.data[1]);
   servo = cmd_msg.data[0];
   esc = cmd_msg.data[1];
 
