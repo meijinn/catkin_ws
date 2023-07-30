@@ -4,22 +4,24 @@
 #include <Wire.h>
 #include <Adafruit_PWMServoDriver.h>
 
-Adafruit_PWMServoDriver pwm = Adafruit_PWMServoDriver();
 
+const int ESC_NEUT = 1520;
+const int SER_NEUT = 1500;
 int esc_pin = 0;
 int servo_pin = 1;
+int esc, servo;
 ros::NodeHandle nh;
 
-int esc, servo;
+Adafruit_PWMServoDriver pwm = Adafruit_PWMServoDriver();
 
 void servoCb(const std_msgs::UInt16MultiArray& cmd_msg) {
 
   if(cmd_msg.data[1] == 0){
-     cmd_msg.data[1] = 1520;
+     cmd_msg.data[1] = ESC_NEUT;
   }
   if(cmd_msg.data[1] == 0 && cmd_msg.data[0] == 0){
-    cmd_msg.data[0] = 1500;
-    cmd_msg.data[1] = 1520;
+    cmd_msg.data[0] = SER_NEUT;
+    cmd_msg.data[1] = ESC_NEUT;
   }
   // servo.write(cmd_msg.data[0]);
   // speedcontroller.write(cmd_msg.data[1]);
@@ -43,10 +45,6 @@ void setup(){
 
 
 void loop(){
-  if(!nh.connected()){
-    pwm.writeMicroseconds(servo_pin, 1500);
-    pwm.writeMicroseconds(esc_pin, 1520);
-  }
   nh.spinOnce();
   delay(1);
 }

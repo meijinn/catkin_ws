@@ -134,6 +134,12 @@ target_link_libraries(ps3_pca9685
   ${catkin_LIBRARIES}
 )
 
+add_executable(ge_force_pca9685_taikan src/ge_force_pca9685_taikan.cpp)
+
+target_link_libraries(ge_force_pca9685_taikan
+  ${catkin_LIBRARIES}
+)
+
 ## Declare a C++ library
 # add_library(${PROJECT_NAME}
 #   src/${PROJECT_NAME}/g29mt.cpp
