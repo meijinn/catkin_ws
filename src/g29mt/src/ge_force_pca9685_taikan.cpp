@@ -1,13 +1,14 @@
 #include <ros/ros.h>
 #include <sensor_msgs/Joy.h>  
 #include <std_msgs/UInt16MultiArray.h>
+#include <std_msgs/Float32.h>
 #include <unistd.h>
 #include <string.h>
 
 
-const int ESC_NEUT = 1520;
+const int ESC_NEUT = 1521;
 const int SER_NEUT = 1500;
-const int BRAKE = ESC_NEUT //1762;
+const int BRAKE = ESC_NEUT; //1762;
 const int thirty = 1502; //29.596 km/h
 const int forty = 1480; //41.345 km/h
 const int fifty = 1458; //51.609 km/h
@@ -120,7 +121,7 @@ void joy_callback(const sensor_msgs::Joy &joy_msg){
 
   //前進時ブレーキ
   if(brake_in > 0 && shift_count > 0){
-    throttle = BRAKE;
+    throttle = ESC_NEUT;
   }
 
   if(shift_count == 0){
@@ -142,11 +143,16 @@ void joy_callback(const sensor_msgs::Joy &joy_msg){
   fflush(stdout);
 }
 
+void chatterCb(const std_msgs::Float32& encoder_msg){
+  ROS_INFO("speed: %f", encoder_msg.data);
+}
+
 int main(int argc, char **argv){
 
   ros::init(argc, argv, "joy_pub_node");
   ros::NodeHandle nh;
   ros::Subscriber sub = nh.subscribe("joy", 10, joy_callback);
+  ros::Subscriber sub2 = nh.subscribe("speed", 10, chatterCb);
 
   ros::Publisher servo_pub = nh.advertise<std_msgs::UInt16MultiArray>("servo", 1);
   ros::Rate loop_rate(100);

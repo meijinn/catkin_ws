@@ -5,9 +5,9 @@
 #include <string.h>
 
 
-const int ESC_NEUT = 1520;
+const int ESC_NEUT = 1530;
 const int SER_NEUT = 1500;
-const int BRAKE = 1762;
+const int BRAKE = ESC_NEUT+10;//1762;
 const int seven = 1510;
 const int eight = 1506;
 const int nine = 1502;
@@ -17,7 +17,8 @@ const int twelve = 1484;
 const int BACK  = 1624;
 
 
-std_msgs::UInt16MultiArray servo;
+//std_msgs::UInt16MultiArray servo;
+std_msgs::UInt16MultiArray controller;
 int shift_count = 0;
 int shift_state = 0;
 int last_shift_state = 0;
@@ -132,8 +133,10 @@ void joy_callback(const sensor_msgs::Joy &joy_msg){
   }
 
   ster = ster_in*(-400)+1500;
-  servo.data[0] = ster;
-  servo.data[1] = throttle;
+  controller.data[0] = ster;
+  controller.data[1] = throttle;
+  //servo.data[0] = ster;
+  //servo.data[1] = throttle;
 
   printf("\rSteering:%d ",ster);
   printf("Throttle:%d ",throttle);
@@ -148,16 +151,17 @@ int main(int argc, char **argv){
   ros::NodeHandle nh;
   ros::Subscriber sub = nh.subscribe("joy", 10, joy_callback);
 
-  ros::Publisher servo_pub = nh.advertise<std_msgs::UInt16MultiArray>("servo", 1);
-  ros::Rate loop_rate(100);
-  // ros::Publisher controller_pub = nh.advertise<std_msgs::UInt8MultiArray>("controller", 1);
+  // ros::Publisher servo_pub = nh.advertise<std_msgs::UInt16MultiArray>("servo", 1);
   // ros::Rate loop_rate(100);
+  ros::Publisher controller_pub = nh.advertise<std_msgs::UInt16MultiArray>("controller", 1);
+  ros::Rate loop_rate(100);
 
   while (ros::ok())
   {
-    servo.data.resize(2);
-    //controller_pub.publish(controller);
-    servo_pub.publish(servo);
+    //servo.data.resize(2);
+    controller.data.resize(2);
+    controller_pub.publish(controller);
+    //servo_pub.publish(servo);
     ros::spinOnce();
     loop_rate.sleep();
   }

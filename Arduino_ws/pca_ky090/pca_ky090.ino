@@ -39,7 +39,7 @@ void loop(){
     pulse = map(counter, 0, 400, PULSENEU, PULSEMIN);
     Serial.print("Pulse: ");
     Serial.println(pulse);
-    pwm.writeMicroseconds(esc_pin, 1520);
+    pwm.writeMicroseconds(esc_pin, 1530);
     pwm.writeMicroseconds(servo_pin, pulse);
   }
   switchals = switchas;
