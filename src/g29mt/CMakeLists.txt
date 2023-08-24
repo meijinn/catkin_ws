@@ -140,6 +140,12 @@ target_link_libraries(ge_force_pca9685_taikan
   ${catkin_LIBRARIES}
 )
 
+add_executable(ps3_twist src/ps3_twist.cpp)
+
+target_link_libraries(ps3_twist
+  ${catkin_LIBRARIES}
+)
+
 ## Declare a C++ library
 # add_library(${PROJECT_NAME}
 #   src/${PROJECT_NAME}/g29mt.cpp

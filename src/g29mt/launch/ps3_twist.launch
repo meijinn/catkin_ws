@@ -1,9 +1,9 @@
 <launch>
   <node name="joy_node" pkg="joy" type="joy_node" />
+  <!-- <node name="g29mt_master" pkg="g29mt_master" type="g29mt_master" output="screen" /> -->
   <node pkg="rosserial_python" type="serial_node.py" name="serial_node" respawn="true">
   <param name="port" value="/dev/ttyUSB0" />
   <param name="baud" value="115200" />
   </node>
-  <node name="ge_force_pca9685_taikan" pkg="g29mt" type="ge_force_pca9685_taikan" output="screen" />
-  <!-- <node name="ps3_pca9685" pkg="g29mt" type="ps3_pca9685" output="screen" /> -->
+  <node name="ps3_twist" pkg="g29mt" type="ps3_twist" output="screen" />
 </launch>
