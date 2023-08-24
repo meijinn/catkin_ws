@@ -1,6 +1,4 @@
-#include <Arduino.h>
 #include <ros.h>
-//#include <std_msgs/UInt16MultiArray.h>
 #include <geometry_msgs/Twist.h>
 #include <Wire.h>
 #include <Adafruit_PWMServoDriver.h>
@@ -12,7 +10,7 @@
 #define SERVO_PIN 1
 
 const int ESC_NEUT = 1530;
-const int SER_NEUT = 1500;
+const int SER_NEUT = 1540;
 const double serA = -1104.25;
 const double serB = 1499.7;
 const double escA = -570;
@@ -38,18 +36,8 @@ Adafruit_PWMServoDriver pwm = Adafruit_PWMServoDriver();
 ************************************************************/
 void messageCb(const geometry_msgs::Twist& msg) {
 
-  if(msg.linear.x > 0){
-    esc_pulse = 1520;
-  }
-  if(msg.linear.x < 0){
-    esc_pulse = 1624;
-  }
-  if(msg.angular.z > 0){
-    servo_pulse = 1040;
-  }
-  if(msg.angular.z < 0){
-    servo_pulse = 1980;
-  }
+  servo_pulse = (int)(-940/0.8*msg.angular.z+1087);
+  esc_pulse = (int)(-114/0.2*msg.linear.x+1567);
   
   pwm.writeMicroseconds(ESC_PIN, esc_pulse);
   pwm.writeMicroseconds(SERVO_PIN, servo_pulse);
