@@ -16,8 +16,8 @@ const double ESC_BACK_PULSE = 1632;
 const double VEL_FORWARD = 0.05;       //  Navigation Forward Velocity
 const double VEL_BACK = -0.04;         //  Navigation Back    Velocity
 
-const double TH_RIGHT_LIMIT = -0.4;   //  Navigation Theta Right Limit
-const double TH_LEFT_LIMIT = 0.4;     //  Navigation Theta Left  Limit
+const double TH_RIGHT_LIMIT = -0.5;   //  Navigation Theta Right Limit
+const double TH_LEFT_LIMIT = 0.5;     //  Navigation Theta Left  Limit
 
 const double serA = -1104.25;         //  Nothing to do Because it has optimized by taken the average.
 const double serB = 1499.7;           //  Same as above.
@@ -51,7 +51,7 @@ void messageCb( const geometry_msgs::Twist& msg){
   // steering_angle [rad]
   // speed_lin [m/s]
   if(msg.linear.x == 0.0){
-    speed_ang = abs(msg.angular.z)/msg.angular.z;
+    speed_ang = msg.angular.z;
   }
   else{
     speed_ang = atan(wheelbase*msg.angular.z/msg.linear.x);
@@ -106,9 +106,9 @@ void ESC_Write(double speed_lin){
 void Servo_Write(double speed_ang){
   /* steering adjast */
   if(speed_ang < TH_RIGHT_LIMIT)
-    speed_ang = TH_RIGHT_LIMIT-0.035;
+    speed_ang = TH_RIGHT_LIMIT;//-0.035;
   if(speed_ang > TH_LEFT_LIMIT)
-    speed_ang = TH_LEFT_LIMIT+0.016;
+    speed_ang = TH_LEFT_LIMIT;//+0.016;
   
   /* servo_pulse to signal calculation */
   servo_pulse = (int)(serA*speed_ang+serB);
