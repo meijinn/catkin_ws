@@ -140,9 +140,9 @@ target_link_libraries(ge_force_pca9685_taikan
   ${catkin_LIBRARIES}
 )
 
-add_executable(ps3_twist src/ps3_twist.cpp)
+add_executable(ps3_twist_pub src/ps3_twist_pub.cpp)
 
-target_link_libraries(ps3_twist
+target_link_libraries(ps3_twist_pub
   ${catkin_LIBRARIES}
 )
 

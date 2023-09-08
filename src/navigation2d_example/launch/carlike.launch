@@ -8,6 +8,10 @@
     <!--  ************** urg_node hector_slam ***************  -->  
   <include file="$(find navigation2d_example)/launch/hector_hokuyo.launch"/>
 
+    <!--  ************** remote control *********************  -->
+  <node name="joy_node" pkg="joy" type="joy_node" />
+  <node pkg="g29mt" name="ps3_twist_pub" type="ps3_twist_pub" output="screen" />
+
     <!--  ************** Navigation ***************  -->
   <node pkg="move_base" type="move_base" respawn="true" name="move_base" output="screen">
    	<rosparam file="$(find navigation2d_example)/param/carlike/costmap_common_params.yaml" command="load" ns="global_costmap" />

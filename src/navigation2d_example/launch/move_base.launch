@@ -1,17 +1,31 @@
 <?xml version="1.0"?>
 <launch>
   <master auto="start"/>
+
+    <!--  ************** urg_node hector_slam ***************  -->  
   <include file="$(find navigation2d_example)/launch/hector_hokuyo.launch"/>
+
+    <!--  ************** remote control *********************  -->
+  <node name="joy_node" pkg="joy" type="joy_node" />
+  <node pkg="g29mt" name="ps3_twist_pub" type="ps3_twist_pub" output="screen" />
+
+    <!--  ************** Navigation ***************  -->
   <node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen">
-  <param name="base_local_planner" value="teb_local_planner/TebLocalPlannerROS" />
     <rosparam file="$(find navigation2d_example)/param/car_move_now/costmap_common_params.yaml" command="load" ns="global_costmap"/>
     <rosparam file="$(find navigation2d_example)/param/car_move_now/costmap_common_params.yaml" command="load" ns="local_costmap"/>
     <rosparam file="$(find navigation2d_example)/param/car_move_now/local_costmap_params.yaml" command="load"/>
     <rosparam file="$(find navigation2d_example)/param/car_move_now/global_costmap_params.yaml" command="load"/>
     <rosparam file="$(find navigation2d_example)/param/car_move_now/base_local_planner_params.yaml" command="load"/>
     <rosparam file="$(find navigation2d_example)/param/car_move_now/move_base_params.yaml" command="load"/>
-    <param name="controller_frequency" value="10.0" />
+
+  <param name="base_local_planner" value="teb_local_planner/TebLocalPlannerROS" />
+  <param name="controller_frequency" value="10.0" />
+  <param name="controller_patience" value="15.0" />
   <param name="clearing_rotation_allowed" value="false" />
+  
+  <param name="base_global_planner" value="global_planner/GlobalPlanner" />
+  <param name="plannner_frequency" value="1.0" />
+  <param name="planner_patience" value="5.0" />
   </node>
   <!-- <node pkg="roomba_500_series" type="roomba500_light_node" respawn="false" name="roomba500_light_node" output="screen"/> -->
 </launch>

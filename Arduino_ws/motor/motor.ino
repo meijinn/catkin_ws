@@ -9,10 +9,10 @@
 #define ESC_PIN 0    // ESC   pin asign
 #define SERVO_PIN 1  // Servo pin asign
 
-const double ESC_NEUT = 1576.4;
+const double ESC_NEUT = 1574.2;
 const int SER_NEUT = 1540;
 const double ESC_FORWARD_PULSE = 1512;
-const double ESC_BACK_PULSE = 1632;
+const double ESC_BACK_PULSE = 1624;
 const double VEL_FORWARD = 0.05;       //  Navigation Forward Velocity
 const double VEL_BACK = -0.04;         //  Navigation Back    Velocity
 
@@ -40,7 +40,7 @@ int esc_pulse, servo_pulse = 0;
 double wheel_rad = 0.06;
 double wheelbase = 0.257;
 
-// 
+// speed_angle [rad/s] speed_lin [m/s]
 double speed_ang = 0.0;
 double speed_lin = 0.0;
 

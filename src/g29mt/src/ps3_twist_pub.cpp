@@ -2,18 +2,22 @@
 #include <sensor_msgs/Joy.h>
 #include <geometry_msgs/Twist.h>
 
-geometry_msgs::Twist cmd_vel;
+geometry_msgs::Twist controller;
 
 double forward, back = 0.0;
 
 void joy_callback(const sensor_msgs::Joy& joy_msg){
     forward = (-joy_msg.axes[5]+1)/2;
     back = (joy_msg.axes[2]-1)/2;
-    cmd_vel.linear.x = (forward+back)*0.1;
-    if(cmd_vel.linear.x < 0){
-        cmd_vel.angular.z *= -1;
+    controller.linear.x = (forward+back)*0.1;
+    if(controller.linear.x < 0){
+        controller.angular.z = -0.5*joy_msg.axes[0];
     }
-    cmd_vel.angular.z = 0.5*joy_msg.axes[0];
+    else{
+        controller.angular.z = 0.5*joy_msg.axes[0];
+    }
+    printf("\rangle:%lf", controller.angular.z);
+    printf("vel:%lf", controller.linear.x);
 }
 
 int main(int argc, char** argv){
@@ -21,14 +25,14 @@ int main(int argc, char** argv){
     ros::NodeHandle nh;
 
     //publish
-    ros::Publisher cmd_pub = nh.advertise<geometry_msgs::Twist>("cmd_vel", 10);
+    ros::Publisher controller_pub = nh.advertise<geometry_msgs::Twist>("controller", 10);
     //      //subscribe
     ros::Subscriber joy_sub = nh.subscribe("joy", 10, joy_callback);
 
     ros::Rate loop_rate(100);
     
     while(ros::ok()){
-        cmd_pub.publish(cmd_vel);
+        controller_pub.publish(controller);
         ros::spinOnce();
         loop_rate.sleep();
     }
