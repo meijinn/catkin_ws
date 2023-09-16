@@ -16,8 +16,8 @@ void joy_callback(const sensor_msgs::Joy& joy_msg){
     else{
         controller.angular.z = 0.5*joy_msg.axes[0];
     }
-    printf("\rangle:%lf", controller.angular.z);
-    printf("vel:%lf", controller.linear.x);
+    controller.linear.z = (int)(joy_msg.buttons[1]);
+    controller.linear.y = (int)(joy_msg.buttons[2]);
 }
 
 int main(int argc, char** argv){

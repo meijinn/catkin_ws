@@ -6,6 +6,7 @@
   <param name="baud" value="115200" />
   </node> -->
   <node name="ps3_twist_pub" pkg="g29mt" type="ps3_twist_pub" output="screen" />
+  <!-- <node name="g29_twist_pub" pkg=g29mt type="g29_twist_pub" output="screen" /> -->
 
     <!--  ************** urg_node hector_slam ***************  -->
   <include file="$(find hector_2)/launch/hector_hokuyo.launch"/>

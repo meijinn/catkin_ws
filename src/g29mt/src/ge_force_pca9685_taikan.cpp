@@ -19,6 +19,8 @@ const int BACK  = 1624;
 
 
 std_msgs::UInt16MultiArray servo;
+std_msgs::Float32 encoder_msg;
+
 int shift_count = 0;
 int shift_state = 0;
 int last_shift_state = 0;
