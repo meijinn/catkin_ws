@@ -100,7 +100,14 @@ void ESC_Write(double speed_lin){
   if(speed_lin < 0 && speed_lin > VEL_BACK)
     speed_lin = VEL_BACK;
   esc_pulse = (int)(escA*speed_lin+escB);
-  pwm.writeMicroseconds(ESC_PIN, esc_pulse);
+  
+  if(speed_lin < 0){
+    pwm.writeMicroseconds(ESC_PIN, (int)(ESC_NEUT+40));
+    pwm.writeMicroseconds(ESC_PIN, esc_pulse);
+  }
+  else{
+    pwm.writeMicroseconds(ESC_PIN, esc_pulse);
+  }
 }
 
 void Servo_Write(double speed_ang){
