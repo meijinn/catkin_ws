@@ -4,10 +4,17 @@ project(navigation2d_example)
 ## Find catkin macros and libraries
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
+find_package(OpenCV REQUIRED)
 find_package(catkin REQUIRED COMPONENTS
   move_base
+  roscpp
+  rospy
+  std_msgs
+  tf
+  move_base_msgs
+  actionlib
+  actionlib_msgs
 )
-
 ## System dependencies are found with CMake's conventions
 # find_package(Boost REQUIRED COMPONENTS system)
 
@@ -93,6 +100,35 @@ catkin_package(
 # include_directories(include)
 include_directories(
   ${catkin_INCLUDE_DIRS}
+  include
+  ${OpenCV_INCLUDE_DIRS}
+)
+
+add_executable(info_float32_publisher src/info_float32_publisher.cpp)
+
+target_link_libraries(info_float32_publisher
+  ${catkin_LIBRARIES}
+  ${OpenCV_LIBRARIES}
+)
+
+add_executable(info_overlay_menu_publisher src/info_overlay_menu_publisher.cpp)
+
+target_link_libraries(info_overlay_menu_publisher
+  ${catkin_LIBRARIES}
+  ${OpenCV_LIBRARIES}
+)
+
+add_executable(info_overlay_text_publisher src/info_overlay_text_publisher.cpp)
+
+target_link_libraries(info_overlay_text_publisher
+  ${catkin_LIBRARIES}
+  ${OpenCV_LIBRARIES}
+)
+
+add_executable(goal_status src/goal_status.cpp)
+
+target_link_libraries(goal_status
+  ${catkin_LIBRARIES}
 )
 
 ## Declare a cpp library

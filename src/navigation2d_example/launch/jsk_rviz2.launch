@@ -1,0 +1,7 @@
+<launch>
+  <arg name="rvizconfig" default="$(find navigation2d_example)/rviz_cfg/jsk_rviz2.rviz" />
+
+  <node name="info_overlay_menu_publisher" pkg="navigation2d_example" type="info_overlay_menu_publisher" />
+  <node name="info_overlay_text_publisher" pkg="navigation2d_example" type="info_overlay_text_publisher" />
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(arg rvizconfig)" required="true" />
+</launch>
