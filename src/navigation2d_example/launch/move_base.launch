@@ -31,17 +31,18 @@
   <param name="planner_patience" value="5.0" />
   </node>
 
-  <node pkg="navigation2d_example" type="2d_nav_goals.py" name="nav_goals_node" respawn="true" output="screen"/>
+  <!-- <node pkg="navigation2d_example" type="2d_nav_goals.py" name="nav_goals_node" respawn="true" output="screen"/> -->
   <node pkg="navigation2d_example" type="goal_status" name="move_base_goal_state" respawn="true" output="screen"/>
   <node pkg="uvc_camera" type="uvc_camera_node" name="mycam">
-  <param name="device" type="string" value="/dev/video1"/>
+  <param name="device" type="string" value="/dev/video0"/>
   <param name="width" value="640" />
   <param name="height" value="480" />
   <param name="frame_rate" value="30" />
   <param name="video_mode" value="mjpeg" />
   </node>
   
-  <node name="info_overlay_menu_publisher" pkg="navigation2d_example" type="info_overlay_menu_publisher" />
+  <!-- <node name="info_overlay_menu_publisher" pkg="navigation2d_example" type="info_overlay_menu_publisher" /> -->
+  <node name="info_float32_publisher" pkg="navigation2d_example" type="info_float32_publisher" />
   <node name="info_overlay_text_publisher" pkg="navigation2d_example" type="info_overlay_text_publisher" />
 
   <!-- <node pkg="roomba_500_series" type="roomba500_light_node" respawn="false" name="roomba500_light_node" output="screen"/> -->

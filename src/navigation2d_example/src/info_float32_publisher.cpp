@@ -1,20 +1,28 @@
 #include <ros/ros.h>
 #include <std_msgs/Float32.h>
-#include <math.h>
+#include <geometry_msgs/Twist.h>
+
+std_msgs::Float32 vel;
+std_msgs::Float32 shift_count;
+
+void callback(const geometry_msgs::Twist& const_msg){
+        vel.data = const_msg.linear.x;
+        shift_count.data = const_msg.linear.y;
+}
 
 int main(int argc, char** argv){
     ros::init(argc, argv, "info_float32_publisher");
     ros::NodeHandle nh;
-    ros::Publisher float_pub = nh.advertise<std_msgs::Float32>("float32",10);
+    
+    ros::Subscriber vel_sub = nh.subscribe("cmd_vel", 10, callback);
+
+    ros::Publisher vel_pub = nh.advertise<std_msgs::Float32>("vel_monitor",10);
+    ros::Publisher shift_pub = nh.advertise<std_msgs::Float32>("shift_monitor",10);
 
     ros::Rate loop_rate(10);
-    int count = 0;
     while(ros::ok()){
-        std_msgs::Float32 float_data;
-        float_data.data = sin(0.02*count*2*M_PI);
-        float_pub.publish(float_data);
-
-        count++;
+        vel_pub.publish(vel);
+        shift_pub.publish(shift_count);
         ros::spinOnce();
         loop_rate.sleep();
     }
