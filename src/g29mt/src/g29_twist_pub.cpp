@@ -150,10 +150,12 @@ void joy_callback(const sensor_msgs::Joy &joy_msg){
   }
   controller.linear.z = (int)(joy_msg.buttons[1]);
   controller.linear.y = (int)(joy_msg.buttons[3]);
+
+  controller.linear.y = shift_count;
   
   printf("\rSteering:%lf ",controller.angular.z);
   printf("Throttle:%lf ",controller.linear.x);
-  printf("Gear:%d ",shift_count);
+  printf("Gear:%.0lf ",controller.linear.y);
   printf("clutch:%s    \r",hantei);
   fflush(stdout);
 }

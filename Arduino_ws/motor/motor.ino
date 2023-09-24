@@ -9,15 +9,15 @@
 #define ESC_PIN 0    // ESC   pin asign
 #define SERVO_PIN 1  // Servo pin asign
 
-const double ESC_NEUT = 1574.2;
+const double ESC_NEUT = 1582;//1598.2;//1582;//1577.9;
 const int SER_NEUT = 1540;
 const double ESC_FORWARD_PULSE = 1512;
 const double ESC_BACK_PULSE = 1624;
-const double VEL_FORWARD = 0.05;       //  Navigation Forward Velocity
-const double VEL_BACK = -0.04;         //  Navigation Back    Velocity
+const double VEL_FORWARD = 0.05;         //  Navigation Forward Velocity
+const double VEL_BACK = -0.03; //-0.015; //  Navigation Back    Velocity
 
-const double TH_RIGHT_LIMIT = -0.5;   //  Navigation Theta Right Limit
-const double TH_LEFT_LIMIT = 0.5;     //  Navigation Theta Left  Limit
+const double TH_RIGHT_LIMIT = -0.35;   //  Navigation Theta Right Limit
+const double TH_LEFT_LIMIT = 0.35;     //  Navigation Theta Left  Limit
 
 const double serA = -1104.25;         //  Nothing to do Because it has optimized by taken the average.
 const double serB = 1499.7;           //  Same as above.
@@ -102,7 +102,7 @@ void ESC_Write(double speed_lin){
   esc_pulse = (int)(escA*speed_lin+escB);
   
   if(speed_lin < 0){
-    pwm.writeMicroseconds(ESC_PIN, (int)(ESC_NEUT+40));
+    pwm.writeMicroseconds(ESC_PIN, (int)(ESC_NEUT+40));//35
     pwm.writeMicroseconds(ESC_PIN, esc_pulse);
   }
   else{
