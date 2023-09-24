@@ -40,6 +40,9 @@
   <param name="frame_rate" value="30" />
   <param name="video_mode" value="mjpeg" />
   </node>
+  
+  <node name="info_overlay_menu_publisher" pkg="navigation2d_example" type="info_overlay_menu_publisher" />
+  <node name="info_overlay_text_publisher" pkg="navigation2d_example" type="info_overlay_text_publisher" />
 
   <!-- <node pkg="roomba_500_series" type="roomba500_light_node" respawn="false" name="roomba500_light_node" output="screen"/> -->
 </launch>
