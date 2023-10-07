@@ -14,6 +14,8 @@ find_package(catkin REQUIRED COMPONENTS
   move_base_msgs
   actionlib
   actionlib_msgs
+  geometry_msgs
+  nav_msgs
 )
 ## System dependencies are found with CMake's conventions
 # find_package(Boost REQUIRED COMPONENTS system)
@@ -128,6 +130,18 @@ target_link_libraries(info_overlay_text_publisher
 add_executable(goal_status src/goal_status.cpp)
 
 target_link_libraries(goal_status
+  ${catkin_LIBRARIES}
+)
+
+add_executable(odometry_listener src/odometry_listener.cpp)
+
+target_link_libraries(odometry_listener
+  ${catkin_LIBRARIES}
+)
+
+add_executable(odometry_talker src/odometry_talker.cpp)
+
+target_link_libraries(odometry_talker
   ${catkin_LIBRARIES}
 )
 

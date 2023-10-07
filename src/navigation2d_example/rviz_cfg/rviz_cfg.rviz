@@ -248,8 +248,7 @@ Visualization Manager:
       Marker Topic: /move_base/TebLocalPlannerROS/teb_markers
       Name: Marker
       Namespaces:
-        RobotFootprintModel: true
-        TebContainer: true
+        {}
       Queue Size: 100
       Value: true
     - Alpha: 1
@@ -315,6 +314,14 @@ Visualization Manager:
       stall duration: 5
       top: 0
       type: SAC
+    - Class: rviz/Marker
+      Enabled: true
+      Marker Topic: /waypoints
+      Name: Marker
+      Namespaces:
+        {}
+      Queue Size: 100
+      Value: true
   Enabled: true
   Global Options:
     Background Color: 48; 48; 48
@@ -343,25 +350,25 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/Orbit
-      Distance: 6.204812049865723
+      Distance: 5.152453899383545
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
         Swap Stereo Eyes: false
         Value: false
       Focal Point:
-        X: -0.1556829810142517
-        Y: 0.004546338692307472
-        Z: 0.32396718859672546
+        X: 0.16889461874961853
+        Y: 0.03132835030555725
+        Z: 0.9269436001777649
       Focal Shape Fixed Size: false
       Focal Shape Size: 0.05000000074505806
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 0.7997976541519165
+      Pitch: 0.4947977662086487
       Target Frame: <Fixed Frame>
       Value: Orbit (rviz)
-      Yaw: 2.813577651977539
+      Yaw: 3.1785762310028076
     Saved: ~
 Window Geometry:
   Displays:
