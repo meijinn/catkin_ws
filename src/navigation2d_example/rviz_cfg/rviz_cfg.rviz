@@ -9,7 +9,7 @@ Panels:
         - /OverlayMenu1
         - /LaserScan1
         - /Image2
-        - /PieChart1
+        - /速度 [m/s]1
         - /OverlayDiagnostic1
       Splitter Ratio: 0.5
     Tree Height: 707
@@ -281,7 +281,7 @@ Visualization Manager:
       Value: true
     - Class: jsk_rviz_plugin/PieChart
       Enabled: true
-      Name: PieChart
+      Name: 速度 [m/s]
       Topic: /vel_monitor
       Value: true
       auto color change: false
@@ -308,7 +308,7 @@ Visualization Manager:
       Topic: /diagnostics_agg
       Value: true
       alpha: 0.800000011920929
-      diagnostics namespace: /
+      diagnostics namespace: ""
       left: 800
       size: 128
       stall duration: 5
