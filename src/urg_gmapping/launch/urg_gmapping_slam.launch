@@ -1,0 +1,4 @@
+<launch>
+    <include file="$(find urg_gmapping)/launch/laser_odometry.launch"/>
+    <include file="$(find urg_gmapping)/launch/gmapping.launch" />
+</launch>

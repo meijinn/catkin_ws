@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<launch>
+  <master auto="start"/>
+
+    <!--  ************** Global Parameters ***************  -->
+    <param name="/use_sim_time" value="false"/>
+
+    <!--  ************** urg_node gmapping ***************  -->  
+  <include file="$(find urg_gmapping)/launch/gmapping.launch"/>
+  <include file="$(find urg_gmapping)/launch/laser_odometry.launch"/>
+
+    <!--  ************** remote control *********************  -->
+  <node name="joy_node" pkg="joy" type="joy_node" />
+  <node pkg="g29mt" name="ps3_twist_pub" type="ps3_twist_pub" output="screen" />
+  <node pkg="g29mt" name="waypoint_pub" type="waypoint_pub.py" output="screen"/>
+  <!-- <node pkg="g29mt" name="g29_twist_pub" type="g29_twist_pub" output="screen" /> -->
+
+    <!--  ************** Navigation ***************  -->
+  <node pkg="move_base" type="move_base" respawn="true" name="move_base" output="screen">
+   	<rosparam file="$(find urg_gmapping)/param/carlike/costmap_common_params.yaml" command="load" ns="global_costmap" />
+ 	  <rosparam file="$(find urg_gmapping)/param/carlike/costmap_common_params.yaml" command="load" ns="local_costmap" />
+	  <rosparam file="$(find urg_gmapping)/param/carlike/local_costmap_params.yaml" command="load" />
+	  <rosparam file="$(find urg_gmapping)/param/carlike/global_costmap_params.yaml" command="load" />
+	  <rosparam file="$(find urg_gmapping)/param/carlike/teb_local_planner_params.yaml" command="load" />
+
+  <param name="base_global_planner" value="global_planner/GlobalPlanner" />
+  <param name="planner_frequency" value="1.0" />
+  <param name="planner_patience" value="5.0" />
+
+  <param name="base_local_planner" value="teb_local_planner/TebLocalPlannerROS" />
+  <param name="controller_frequency" value="5.0" />
+  <param name="controller_patience" value="15.0" />
+
+  <param name="clearing_rotation_allowed" value="false" />
+  </node>
+
+  <!-- <node pkg="navigation2d_example" type="2d_nav_goals.py" name="nav_goals_node" respawn="true" output="screen"/> -->
+  <node pkg="navigation2d_example" type="goal_status" name="move_base_goal_state" respawn="true" output="screen"/>
+  <node pkg="uvc_camera" type="uvc_camera_node" name="mycam">
+  <param name="device" type="string" value="/dev/video0"/>
+  <param name="width" value="640" />
+  <param name="height" value="480" />
+  <param name="frame_rate" value="30" />
+  <param name="video_mode" value="mjpeg" />
+  </node>
+  
+  <!-- <node name="info_overlay_menu_publisher" pkg="navigation2d_example" type="info_overlay_menu_publisher" /> -->
+  <node name="info_float32_publisher" pkg="navigation2d_example" type="info_float32_publisher" />
+  <node name="info_overlay_text_publisher" pkg="navigation2d_example" type="info_overlay_text_publisher" />
+
+</launch>
