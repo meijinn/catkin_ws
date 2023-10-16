@@ -1,0 +1,29 @@
+<launch>
+		<!-- Load robot description and start state publisher-->
+    <param name="robot_description" textfile="$(find gbot_core)/urdf/head_2d.urdf" />
+
+    <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
+		
+		<!-- Start RPLIDAR sensor node which provides LaserScan data  -->
+    <node name="urg_node" pkg="urg_node" type="urg_node" output="screen">
+        <param name="serial_port" value="/dev/ttyACM0"/>
+        <param name="serial_baud" value="115200"/>
+        <param name="frame_id" value="base_link"/>
+        <param name="calibrate_time" value="true"/>
+        <param name="publish_intensity" value="false"/>
+        <param name="publish_multiecho" value="false"/>
+        <param name="angle_min" value="-1.5707963"/>
+        <param name="angle_max" value="1.5707963"/>
+    </node>
+		
+		<!-- Start Google Cartographer node with custom configuration file-->
+    <node name="cartographer_node" pkg="cartographer_ros" type="cartographer_node" args="
+          -configuration_directory
+              $(find gbot_core)/configuration_files
+          -configuration_basename gbot_lidar_2d.lua" output="screen">
+    </node>
+
+		<!-- Additional node which converts Cartographer map into ROS occupancy grid map. Not used and can be skipped in this case -->
+    <node name="cartographer_occupancy_grid_node" pkg="cartographer_ros" type="cartographer_occupancy_grid_node" args="-resolution 0.05" />
+    
+</launch>

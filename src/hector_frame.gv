@@ -1,0 +1,14 @@
+digraph G {
+"base_frame" -> "laser"[label="Broadcaster: /base_frame_2_laser_link\nAverage rate: 10.191 Hz\nMost recent transform: 1697082873.983 ( -0.024 sec old)\nBuffer length: 4.906 sec\n"];
+"base_stabilized" -> "base_frame"[label="Broadcaster: /hector_mapping\nAverage rate: 19.703 Hz\nMost recent transform: 1697082873.993 ( -0.034 sec old)\nBuffer length: 5.025 sec\n"];
+"base_link" -> "base_stabilized"[label="Broadcaster: /base_link_2_base_stabilized_link\nAverage rate: 10.197 Hz\nMost recent transform: 1697082873.968 ( -0.009 sec old)\nBuffer length: 4.805 sec\n"];
+"map" -> "odom"[label="Broadcaster: /map_2_odom\nAverage rate: 10.192 Hz\nMost recent transform: 1697082874.024 ( -0.066 sec old)\nBuffer length: 4.906 sec\n"];
+"base_footprint" -> "base_link"[label="Broadcaster: /base_footprint_2_base_link\nAverage rate: 10.191 Hz\nMost recent transform: 1697082874.029 ( -0.070 sec old)\nBuffer length: 4.906 sec\n"];
+"odom" -> "base_footprint"[label="Broadcaster: /odom_2_base_footprint\nAverage rate: 10.197 Hz\nMost recent transform: 1697082873.968 ( -0.009 sec old)\nBuffer length: 4.805 sec\n"];
+"base_frame" -> "nav"[label="Broadcaster: /base_2_nav_link\nAverage rate: 10.191 Hz\nMost recent transform: 1697082874.047 ( -0.088 sec old)\nBuffer length: 4.906 sec\n"];
+"map" -> "scanmatcher_frame"[label="Broadcaster: /hector_mapping\nAverage rate: 10.166 Hz\nMost recent transform: 1697082873.788 ( 0.170 sec old)\nBuffer length: 4.820 sec\n"];
+edge [style=invis];
+ subgraph cluster_legend { style=bold; color=black; label ="view_frames Result";
+"Recorded at time: 1697082873.959"[ shape=plaintext ] ;
+ }->"map";
+}
