@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<package>
+  <name>pimouse_slam</name>
+  <version>0.1.0</version>
+  <description>The pimouse_slam package</description>
+
+  <maintainer email="ryuichiueda@gmail.com">Ryuichi Ueda</maintainer>
+  <license>MIT</license>
+
+  <buildtool_depend>catkin</buildtool_depend>
+  <build_depend>rospy</build_depend>
+  <run_depend>rospy</run_depend>
+  <run_depend>gmapping</run_depend>
+  <run_depend>pimouse_ros</run_depend>
+  <run_depend>urg_node</run_depend>
+</package>
