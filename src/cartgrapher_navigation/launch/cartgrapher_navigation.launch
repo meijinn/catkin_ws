@@ -1,0 +1,62 @@
+<launch>
+    <!-- Load robot description and start state publisher-->
+    <param name="robot_description" textfile="$(find cartgrapher_navigation)/urdf/robot_model.urdf" />
+    <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
+		
+    <!--  ************** remote control *********************  -->
+    <node name="joy_node" pkg="joy" type="joy_node" />
+    <node pkg="g29mt" name="ps3_twist_pub" type="ps3_twist_pub" output="screen" />
+    <node pkg="g29mt" name="waypoint_pub" type="waypoint_pub.py" output="screen"/>
+    <include file="$(find urg_gmapping)/launch/laser_odometry.launch"/>
+		<!-- Start RPLIDAR sensor node which provides LaserScan data  -->
+    <!-- <node name="urg_node" pkg="urg_node" type="urg_node" output="screen">
+        <param name="serial_port" value="/dev/ttyACM0"/>
+        <param name="serial_baud" value="115200"/>
+        <param name="frame_id" value="base_link"/>
+        <param name="calibrate_time" value="true"/>
+        <param name="publish_intensity" value="false"/>
+        <param name="publish_multiecho" value="false"/>
+        <param name="angle_min" value="-1.5707963"/>
+        <param name="angle_max" value="1.5707963"/>
+    </node> -->
+
+    <!-- outdoor -->
+    <node name="cartographer_node" pkg="cartographer_ros" type="cartographer_node" args="
+          -configuration_directory
+              $(find cartgrapher_navigation)/configuration_files
+          -configuration_basename gbot_lidar_2d.lua" output="screen">
+    </node>
+
+		<!-- Additional node which converts Cartographer map into ROS occupancy grid map. Not used and can be skipped in this case -->
+    <node name="cartographer_occupancy_grid_node" pkg="cartographer_ros" type="cartographer_occupancy_grid_node" args="-resolution 0.05" />
+
+    <!-- move base -->
+    <node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen">
+      <param name="base_local_planner" value="teb_local_planner/TebLocalPlannerROS" />
+      <rosparam file="$(find cartgrapher_navigation)/param/costmap_common_params.yaml" command="load" ns="global_costmap"/>
+      <rosparam file="$(find cartgrapher_navigation)/param/costmap_common_params.yaml" command="load" ns="local_costmap"/>
+      <rosparam file="$(find cartgrapher_navigation)/param/local_costmap_params.yaml" command="load"/>
+      <rosparam file="$(find cartgrapher_navigation)/param/global_costmap_params.yaml" command="load"/>
+      <!--<rosparam file="$(find cartgrapher_navigation)/param/base_local_planner_params.yaml" command="load"/>-->
+      <!-- <rosparam file="$(find cartgrapher_navigation)/param/dwa_local_planner_params.yaml" command="load" /> -->
+      <rosparam file="$(find cartgrapher_navigation)/param/teb_local_planner_params.yaml" command="load" />
+      <rosparam file="$(find cartgrapher_navigation)/param/move_base_params.yaml" command="load"/>
+    </node>
+
+    <!-- <node pkg="navigation2d_example" type="2d_nav_goals.py" name="nav_goals_node" respawn="true" output="screen"/> -->
+    <node pkg="navigation2d_example" type="goal_status" name="move_base_goal_state" respawn="true" output="screen"/>
+    <node pkg="uvc_camera" type="uvc_camera_node" name="mycam">
+    <param name="device" type="string" value="/dev/video0"/>
+    <param name="width" value="640" />
+    <param name="height" value="480" />
+    <param name="frame_rate" value="30" />
+    <param name="video_mode" value="mjpeg" />
+    </node>
+  
+    <!-- <node name="info_overlay_menu_publisher" pkg="navigation2d_example" type="info_overlay_menu_publisher" /> -->
+    <node name="info_float32_publisher" pkg="navigation2d_example" type="info_float32_publisher" />
+    <node name="info_overlay_text_publisher" pkg="navigation2d_example" type="info_overlay_text_publisher" />
+
+    <!-- Start RViz with custom view -->
+    <node pkg="rviz" type="rviz" name="show_rviz" args="-d $(find cartgrapher_navigation)/rviz/navigation.rviz"/>    
+</launch>
