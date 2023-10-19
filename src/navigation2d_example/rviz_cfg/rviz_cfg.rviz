@@ -7,10 +7,7 @@ Panels:
         - /Global Options1
         - /Status1
         - /OverlayMenu1
-        - /LaserScan1
-        - /Image2
-        - /速度 [m/s]1
-        - /OverlayDiagnostic1
+        - /Map2
       Splitter Ratio: 0.5
     Tree Height: 707
   - Class: rviz/Selection
@@ -189,7 +186,7 @@ Visualization Manager:
       Value: false
     - Alpha: 0.699999988079071
       Class: rviz/Map
-      Color Scheme: map
+      Color Scheme: costmap
       Draw Behind: false
       Enabled: true
       Name: Map
@@ -350,7 +347,7 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/Orbit
-      Distance: 5.152453899383545
+      Distance: 3.5112533569335938
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1

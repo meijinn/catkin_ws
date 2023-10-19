@@ -26,7 +26,7 @@
     <rosparam file="$(find urg_gmapping)/param/car_move_now/move_base_params.yaml" command="load"/>
 
     <param name="base_local_planner" value="teb_local_planner/TebLocalPlannerROS" />
-    <param name="controller_frequency" value="10.0" />
+    <param name="controller_frequency" value="2.0" />
     <param name="controller_patience" value="15.0" />
     <param name="clearing_rotation_allowed" value="false" />
   
