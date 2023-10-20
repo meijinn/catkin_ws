@@ -7,6 +7,8 @@ Panels:
         - /Global Options1
         - /Status1
         - /LaserScan1
+        - /ポップアップ表示1
+        - /速度 [m/s]1
         - /RobotModel1/Links1
       Splitter Ratio: 0.5
     Tree Height: 827
@@ -94,8 +96,8 @@ Visualization Manager:
     - Alpha: 1
       Autocompute Intensity Bounds: true
       Autocompute Value Bounds:
-        Max Value: 4.639125347137451
-        Min Value: -0.00459496071562171
+        Max Value: 1.6371498107910156
+        Min Value: -0.17831403017044067
         Value: true
       Axis: X
       Channel Name: intensity
@@ -222,7 +224,7 @@ Visualization Manager:
       Enabled: true
       Foreground Alpha: 1
       Foreground Color: 25; 255; 240
-      Name: OverlayMenu
+      Name: ポップアップ表示
       Overtake BG Color Properties: true
       Overtake FG Color Properties: true
       Topic: /menu
@@ -241,7 +243,7 @@ Visualization Manager:
       clockwise rotate direction: false
       foreground alpha: 0.699999988079071
       foreground alpha 2: 0.4000000059604645
-      foreground color: 32; 74; 135
+      foreground color: 25; 255; 240
       left: 30
       max color: 255; 0; 0
       max color change threthold: 0
@@ -373,10 +375,10 @@ Visualization Manager:
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 0.3247961699962616
+      Pitch: 1.124795913696289
       Target Frame: base_link
       Value: ThirdPersonFollower (rviz)
-      Yaw: 3.2540440559387207
+      Yaw: 3.1640429496765137
     Saved: ~
 Window Geometry:
   Displays:
