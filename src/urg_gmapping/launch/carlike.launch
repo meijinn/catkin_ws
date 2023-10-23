@@ -11,9 +11,9 @@
 
     <!--  ************** remote control *********************  -->
   <node name="joy_node" pkg="joy" type="joy_node" />
-  <node pkg="g29mt" name="ps3_twist_pub" type="ps3_twist_pub" output="screen" />
+  <!-- <node pkg="g29mt" name="ps3_twist_pub" type="ps3_twist_pub" output="screen" /> -->
   <node pkg="g29mt" name="waypoint_pub" type="waypoint_pub.py" output="screen"/>
-  <!-- <node pkg="g29mt" name="g29_twist_pub" type="g29_twist_pub" output="screen" /> -->
+  <node pkg="g29mt" name="g29_twist_pub" type="g29_twist_pub" output="screen" />
 
     <!--  ************** Navigation ***************  -->
   <node pkg="move_base" type="move_base" respawn="true" name="move_base" output="screen">
@@ -37,7 +37,7 @@
   <!-- <node pkg="navigation2d_example" type="2d_nav_goals.py" name="nav_goals_node" respawn="true" output="screen"/> -->
   <node pkg="navigation2d_example" type="goal_status" name="move_base_goal_state" respawn="true" output="screen"/>
   <node pkg="uvc_camera" type="uvc_camera_node" name="mycam">
-  <param name="device" type="string" value="/dev/video0"/>
+  <param name="device" type="string" value="/dev/video1"/>
   <param name="width" value="640" />
   <param name="height" value="480" />
   <param name="frame_rate" value="30" />

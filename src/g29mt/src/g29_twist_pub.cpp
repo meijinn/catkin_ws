@@ -7,12 +7,12 @@
 #define VMAX 0.1
 
 const double neut = 0.0;
-const double low = 0.01;
-const double second = 0.02;
-const double third = 0.04;
-const double fourth = 0.05;
-const double top = 0.06;
-const double high_top = 0.08;
+const double low = 0.05;
+const double second = 0.068;
+const double third = 0.075;
+const double fourth = 0.08;
+const double top = 0.09;
+const double high_top = VMAX;
 const double back_vel = -VMAX/2;
 double forward, back = 0.0;
 
@@ -151,13 +151,13 @@ void joy_callback(const sensor_msgs::Joy &joy_msg){
   controller.linear.z = (int)(joy_msg.buttons[1]);
   controller.linear.y = (int)(joy_msg.buttons[3]);
 
-  controller.linear.y = shift_count;
+  controller.angular.y = shift_count;
   
-  printf("\rSteering:%lf ",controller.angular.z);
-  printf("Throttle:%lf ",controller.linear.x);
-  printf("Gear:%.0lf ",controller.linear.y);
-  printf("clutch:%s    \r",hantei);
-  fflush(stdout);
+  // printf("\rSteering:%lf ",controller.angular.z);
+  // printf("Throttle:%lf ",controller.linear.x);
+  // printf("Gear:%.0lf ",controller.linear.y);
+  // printf("clutch:%s    \r",hantei);
+  // fflush(stdout);
 }
 
 // void chatterCb(const std_msgs::Float32& encoder_msg){

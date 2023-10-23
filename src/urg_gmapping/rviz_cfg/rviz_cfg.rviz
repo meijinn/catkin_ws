@@ -6,8 +6,6 @@ Panels:
       Expanded:
         - /Global Options1
         - /Status1
-        - /LaserScan1
-        - /ポップアップ表示1
         - /速度 [m/s]1
         - /RobotModel1/Links1
       Splitter Ratio: 0.5
@@ -96,8 +94,8 @@ Visualization Manager:
     - Alpha: 1
       Autocompute Intensity Bounds: true
       Autocompute Value Bounds:
-        Max Value: 1.6371498107910156
-        Min Value: -0.17831403017044067
+        Max Value: 1.319228172302246
+        Min Value: -0.4259531497955322
         Value: true
       Axis: X
       Channel Name: intensity
@@ -237,19 +235,19 @@ Visualization Manager:
       Name: 速度 [m/s]
       Topic: /vel_monitor
       Value: true
-      auto color change: false
+      auto color change: true
       background color: 0; 0; 0
       backround alpha: 0
-      clockwise rotate direction: false
+      clockwise rotate direction: true
       foreground alpha: 0.699999988079071
       foreground alpha 2: 0.4000000059604645
       foreground color: 25; 255; 240
       left: 30
-      max color: 255; 0; 0
-      max color change threthold: 0
+      max color: 239; 41; 41
+      max color change threthold: 0.07000000029802322
       max value: 0.10000000149011612
-      med color: 255; 0; 0
-      med color change threthold: 0
+      med color: 0; 255; 0
+      med color change threthold: 0.029999999329447746
       min value: 0
       show caption: true
       size: 200
@@ -332,6 +330,29 @@ Visualization Manager:
       Update Interval: 0
       Value: false
       Visual Enabled: true
+    - Class: jsk_rviz_plugin/PieChart
+      Enabled: true
+      Name: ギア
+      Topic: /shift_monitor
+      Value: true
+      auto color change: false
+      background color: 0; 0; 0
+      backround alpha: 0
+      clockwise rotate direction: true
+      foreground alpha: 0.699999988079071
+      foreground alpha 2: 0.4000000059604645
+      foreground color: 25; 255; 240
+      left: 29
+      max color: 255; 0; 0
+      max color change threthold: 0
+      max value: 6
+      med color: 255; 0; 0
+      med color change threthold: 0
+      min value: 0
+      show caption: true
+      size: 80
+      text size: 14
+      top: 200
   Enabled: true
   Global Options:
     Background Color: 48; 48; 48
@@ -375,10 +396,10 @@ Visualization Manager:
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 1.124795913696289
+      Pitch: 0.5647962689399719
       Target Frame: base_link
       Value: ThirdPersonFollower (rviz)
-      Yaw: 3.1640429496765137
+      Yaw: 2.9940407276153564
     Saved: ~
 Window Geometry:
   Displays:
