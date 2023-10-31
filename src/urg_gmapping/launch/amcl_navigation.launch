@@ -4,16 +4,17 @@
 
     <!--  ************** Global Parameters ***************  -->
     <param name="/use_sim_time" value="false"/>
-    <arg name="map" default="test"/>
+    <arg name="map" default="opt_auto"/>
+    <arg name="input" default="g29"/>
 
     <!--  ************** laser_odometry ***************  -->
     <include file="$(find urg_gmapping)/launch/laser_odometry.launch"/>
 
     <!--  ************** remote control *********************  -->
     <node name="joy_node" pkg="joy" type="joy_node" />
-    <node pkg="g29mt" name="ps3_twist_pub" type="ps3_twist_pub" output="screen" />
     <node pkg="g29mt" name="waypoint_pub" type="waypoint_pub.py" output="screen"/>
-    <!-- <node pkg="g29mt" name="g29_twist_pub" type="g29_twist_pub" output="screen" /> -->
+    <node if="$(eval input == 'g29')" name="g29_twist_pub" pkg="g29mt" type="g29_twist_pub" output="screen"/>
+    <node if="$(eval input == 'ps3')" name="ps3_twist_pub" pkg="g29mt" type="ps3_twist_pub" output="screen" />
 
     <!--  ************** Navigation ********************  -->
     <node pkg="move_base" type="move_base" respawn="true" name="move_base" output="screen">
@@ -24,7 +25,7 @@
         <rosparam file="$(find urg_gmapping)/param/amcl/teb_local_planner_params.yaml" command="load" />
 
         <param name="base_global_planner" value="global_planner/GlobalPlanner" />
-        <param name="planner_frequency" value="value=1.0" />
+        <param name="planner_frequency" value="1.0" />
         <param name="planner_patience" value="5.0" />
 
         <param name="base_local_planner" value="teb_local_planner/TebLocalPlannerROS" />
@@ -40,7 +41,8 @@
     </node>
     
     <!--  ****************** map_server *********************  -->
-    <node if="$(eval map == 'nitac')" name="map_server" pkg="map_server" type="map_server" args="$(find urg_gmapping)/$(arg map).yaml"/>
+    <node if="$(eval map == 'nitac')" name="map_server" pkg="map_server" type="map_server" args="$(find urg_gmapping)/maps/$(arg map).yaml"/>
+    <node if="$(eval map == 'auto_drive')" name="map_server" pkg="map_server" type="map_server" args="$(find urg_gmapping)/maps/$(arg map)_waypoint.yaml"/>
     <node pkg="rviz" type="rviz" name="rviz" args="-d $(find urg_gmapping)/rviz_cfg/rviz_amcl.rviz"/>
 
     <!-- <node pkg="navigation2d_example" type="2d_nav_goals.py" name="nav_goals_node" respawn="true" output="screen"/> -->

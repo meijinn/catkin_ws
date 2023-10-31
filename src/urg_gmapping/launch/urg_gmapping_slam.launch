@@ -1,4 +1,8 @@
 <launch>
+    <arg name="input" default="g29"/>
     <include file="$(find urg_gmapping)/launch/laser_odometry.launch"/>
     <include file="$(find urg_gmapping)/launch/gmapping.launch" />
+    <node name="joy_node" pkg="joy" type="joy_node" />
+    <node if="$(eval input == 'g29')" name="g29_twist_pub" pkg="g29mt" type="g29_twist_pub" output="screen"/>
+    <node if="$(eval input == 'ps3')" name="ps3_twist_pub" pkg="g29mt" type="ps3_twist_pub" output="screen" />
 </launch>
