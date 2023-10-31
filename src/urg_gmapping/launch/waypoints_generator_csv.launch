@@ -13,6 +13,10 @@
         <param name="file_name" value="$(arg file_name)" />
         <param name="path_to_pkg" value="$(find urg_gmapping)" />
     </node>
+    <node if="$(eval select=='clicked_user' or select=='user')" name="clicked_point_csv" pkg="urg_gmapping" type="clicked_point_csv.py" output="screen">
+        <param name="file_name" value="user" />
+        <param name="path_to_pkg" value="$(find urg_gmapping)" />
+    </node>
     <node if="$(eval select=='threshold' or select=='t')" name="threshold_csv" pkg="urg_gmapping" type="threshold_csv.py" output="screen">
         <param name="file_name" value="$(arg file_name)" />
         <param name="path_to_pkg" value="$(find urg_gmapping)" />

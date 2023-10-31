@@ -77,7 +77,7 @@ void navStatusCallBack(const actionlib_msgs::GoalStatusArray::ConstPtr &status){
     }
     if(status_id == 2){
     // # The goal received a cancel request after it started executing and has since completed its execution (Terminal State)
-        text.text = "ゴールはキャンセルされました。:2";
+        text.text = "目的地はキャンセルされました。次の目的地が設定されました。:2";
         menu.current_index = 1;
     }
     if(status_id == 4){
@@ -86,27 +86,35 @@ void navStatusCallBack(const actionlib_msgs::GoalStatusArray::ConstPtr &status){
         color2.g = 20.0 / 255;
         color2.b = 60.0 / 255;
         color2.a = 0.8;
-        text.text = "エラーによりゴールが除外されました。:4";
+        text.text = "エラーにより目的地が除外されました。\n 手動運転に切り替えて下さい。:4";
         menu.current_index = 1;
     }
     if(status_id == 5){
     // # The goal was rejected by the action server without being processed, because the goal was unattainable or invalid (Terminal State)
-        text.text = "到達できないので却下されました。:5";
+        color2.r = 220.0 / 255;
+        color2.g = 20.0 / 255;
+        color2.b = 60.0 / 255;
+        color2.a = 0.8;
+        text.text = "目的地に到達できないので却下されました。\n 手動運転に切り替えて下さい。:5";
         menu.current_index = 1;
     }
     if(status_id == 6){
     // # The goal received a cancel request after it started executing and has not yet completed execution
-        text.text = "キャンセルリクエスト中です。:6";
+        color2.r = 220.0 / 255;
+        color2.g = 20.0 / 255;
+        color2.b = 60.0 / 255;
+        color2.a = 0.8;
+        text.text = "目的地のキャンセルリクエスト中です。 \n 手動運転に切り替えて下さい。:6";
         menu.current_index = 1;
     }
     if(status_id == 7){
     // # The goal received a cancel request before it started executing, but the action server has not yet confirmed that the goal is canceled
-        text.text = "キャンセルリクエストの認識中です。:7";
+        text.text = "目的地のキャンセルリクエストの認識中です。:7";
         menu.current_index = 1;
     }
     if(status_id == 8){
     // # The goal received a cancel request before it started executing and was successfully cancelled (Terminal State)
-        text.text = "正常にキャンセルされました。\n 手動運転に \n 切り替えて下さい。:8";
+        text.text = "目的地が正常にキャンセルされました。\n 手動運転に \n 切り替えて下さい。:8";
     }
     if(status_id == 9){
     // # An action client can determine that a goal is LOST. This should not be sent over the wire by an action server
@@ -114,7 +122,7 @@ void navStatusCallBack(const actionlib_msgs::GoalStatusArray::ConstPtr &status){
         color2.g = 20.0 / 255;
         color2.b = 60.0 / 255;
         color2.a = 0.8;
-        text.text = "目標ゴールを見失いました。\n 手動運転に \n 切り替えて下さい。:9";
+        text.text = "目的地を見失いました。\n 手動運転に \n 切り替えて下さい。:9";
     }
 }
 

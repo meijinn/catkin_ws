@@ -1,7 +1,13 @@
 <launch>
     <arg name="distance_tolerance" default="1.0" />
     <arg name="file_name" default="waypoints" />
-    <node name="publish_marker" pkg="urg_gmapping" type="publish_marker.py" output="screen">
+
+    <node if="$(eval file_name == 'waypoints')" name="publish_marker" pkg="urg_gmapping" type="publish_marker.py" output="screen">
+        <param name="file_name" value="$(arg file_name)" />
+        <param name="distance_tolerance" value="$(arg distance_tolerance)" />
+        <param name="path_to_pkg" value="$(find urg_gmapping)" />
+    </node>
+    <node if="$(eval file_name == 'user')" name="publish_marker" pkg="urg_gmapping" type="publish_marker.py" output="screen">
         <param name="file_name" value="$(arg file_name)" />
         <param name="distance_tolerance" value="$(arg distance_tolerance)" />
         <param name="path_to_pkg" value="$(find urg_gmapping)" />

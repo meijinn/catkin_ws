@@ -11,10 +11,10 @@ void joy_callback(const sensor_msgs::Joy& joy_msg){
     back = (joy_msg.axes[2]-1)/2;
     controller.linear.x = (forward+back)*0.1;
     if(controller.linear.x < 0){
-        controller.angular.z = -0.5*joy_msg.axes[0];
+        controller.angular.z = -0.3*joy_msg.axes[0];
     }
     else{
-        controller.angular.z = 0.5*joy_msg.axes[0];
+        controller.angular.z = 0.3*joy_msg.axes[0];
     }
     controller.linear.z = (int)(joy_msg.buttons[1]);
     controller.linear.y = (int)(joy_msg.buttons[2]);

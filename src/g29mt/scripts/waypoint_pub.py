@@ -6,8 +6,8 @@ from subprocess import *
 def callback(cont_msg):
     if cont_msg.linear.y == 1:
           call(['roslaunch','urg_gmapping','run.launch','use_py:=false'])
-    if cont_msg.linear.z == 1:
-           kill_node('waypoint_pub')
+#    if cont_msg.linear.z == 1:
+#           kill_node('waypoint_pub')
 
 def kill_node(nodename): 
 	p2=Popen(['rosnode','list'],stdout=PIPE) 
