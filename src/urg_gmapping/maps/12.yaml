@@ -1,4 +1,4 @@
-image: /home/takahashi/catkin_ws/src/urg_gmapping/maps/gmapping.pgm
+image: /home/takahashi/catkin_ws/src/urg_gmapping/maps/12.pgm
 resolution: 0.050000
 origin: [-10.000000, -10.000000, 0.000000]
 negate: 0
