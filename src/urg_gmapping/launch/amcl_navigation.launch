@@ -43,9 +43,9 @@
     <!--  ****************** map_server *********************  -->
     <node if="$(eval map == 'user')" name="map_server" pkg="map_server" type="map_server" args="$(find urg_gmapping)/maps/$(arg map).yaml"/>
     <node if="$(eval map == 'auto')" name="map_server" pkg="map_server" type="map_server" args="$(find urg_gmapping)/maps/$(arg map).yaml"/>
-    <node if="$(eval map == 'cartographer')" name="map_server" pkg="map_server" type="map_server" args="$(find urg_gmapping)/maps/$(arg map).yaml"/>
-    <node if="$(eval map == 'hector')" name="map_server" pkg="map_server" type="map_server" args="$(find urg_gmapping)/maps/$(arg map).yaml"/>
-    <node if="$(eval map == 'gmapping')" name="map_server" pkg="map_server" type="map_server" args="$(find urg_gmapping)/maps/$(arg map).yaml"/>
+    <node if="$(eval map == 'cartographer')" name="map_server" pkg="map_server" type="map_server" args="$(find urg_gmapping)/map_comp/$(arg map).yaml"/>
+    <node if="$(eval map == 'hector_slam')" name="map_server" pkg="map_server" type="map_server" args="$(find urg_gmapping)/map_comp/$(arg map).yaml"/>
+    <node if="$(eval map == 'gmapping')" name="map_server" pkg="map_server" type="map_server" args="$(find urg_gmapping)/map_comp/$(arg map).yaml"/>
     <node pkg="rviz" type="rviz" name="rviz" args="-d $(find urg_gmapping)/rviz_cfg/rviz_amcl.rviz"/>
 
     <!-- <node pkg="navigation2d_example" type="2d_nav_goals.py" name="nav_goals_node" respawn="true" output="screen"/> -->

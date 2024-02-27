@@ -33,6 +33,14 @@
       <param name="map_frame"  value="/map" />
     </node>
 
+    <node pkg="uvc_camera" type="uvc_camera_node" name="mycam">
+        <param name="device" type="string" value="/dev/video1"/>
+        <param name="width" value="640" />
+        <param name="height" value="480" />
+        <param name="frame_rate" value="30" />
+        <param name="video_mode" value="mjpeg" />
+    </node>
+
     <!-- ******************** rviz ******************** -->
     <node pkg="rviz" type="rviz" name="rviz" args="-d $(find urg_gmapping)/rviz_cfg/rviz_cfg.rviz"/>
 </launch>
