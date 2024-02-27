@@ -1,0 +1,31 @@
+<launch>
+    <arg name="select" default="threshold" /> <!-- key_click(k) or clicked_point(c) or threshold(t)-->
+    <arg name="file_name" default="waypoints" />
+    <arg name="dist_th" default="1.0" /> <!-- meter -->
+    <arg name="theta_th" default="90.0" /> <!-- degree -->
+    <arg name="use_debug_marker" default="true" />
+    <arg name="distance_tolerance" default="0.5" />
+    <node if="$(eval select=='key_click' or select=='k')" name="key_click_csv" pkg="slam_dungeon" type="key_click_csv.py" output="screen">
+        <param name="file_name" value="$(arg file_name)" />
+        <param name="path_to_pkg" value="$(find slam_dungeon)" />
+    </node>
+    <node if="$(eval select=='clicked_point' or select=='c')" name="clicked_point_csv" pkg="slam_dungeon" type="clicked_point_csv.py" output="screen">
+        <param name="file_name" value="$(arg file_name)" />
+        <param name="path_to_pkg" value="$(find slam_dungeon)" />
+    </node>
+    <node if="$(eval select=='clicked_user' or select=='user')" name="clicked_point_csv" pkg="slam_dungeon" type="clicked_point_csv.py" output="screen">
+        <param name="file_name" value="user" />
+        <param name="path_to_pkg" value="$(find slam_dungeon)" />
+    </node>
+    <node if="$(eval select=='threshold' or select=='t')" name="threshold_csv" pkg="slam_dungeon" type="threshold_csv.py" output="screen">
+        <param name="file_name" value="$(arg file_name)" />
+        <param name="path_to_pkg" value="$(find slam_dungeon)" />
+        <param name="dist_th" value="$(arg dist_th)" />
+        <param name="theta_th" value="$(arg theta_th)" />
+    </node>
+    <node if="$(arg use_debug_marker)" name="publish_marker" pkg="slam_dungeon" type="publish_marker.py">
+        <param name="file_name" value="$(arg file_name)" />
+        <param name="distance_tolerance" value="$(arg distance_tolerance)" />
+        <param name="path_to_pkg" value="$(find slam_dungeon)" />
+    </node>
+</launch>

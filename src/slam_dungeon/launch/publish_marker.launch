@@ -1,0 +1,10 @@
+<launch>
+    <arg name="distance_tolerance" default="0.5" />
+    <arg name="file_name" default="waypoints" />
+
+    <node if="$(eval file_name == 'waypoints')" name="publish_marker" pkg="slam_dungeon" type="publish_marker.py" output="screen">
+        <param name="file_name" value="$(arg file_name)" />
+        <param name="distance_tolerance" value="$(arg distance_tolerance)" />
+        <param name="path_to_pkg" value="$(find slam_dungeon)" />
+    </node>
+</launch>
