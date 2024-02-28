@@ -5,11 +5,6 @@ from cv_bridge import CvBridge, CvBridgeError
 from sensor_msgs.msg import Image
 
 def callback(image_msg):
-    """This function is called to handle the subscribed messages
-
-    Args:
-        image_msg (Image): message type Image from sensor_msgs
-    """
     try:
         cv_image = bridge.imgmsg_to_cv2(image_msg)
         cv2.imshow('ROS Image Subscriber', cv_image)

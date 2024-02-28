@@ -2,9 +2,10 @@
 # -*- coding: utf-8 -*-
 
 # key_click の改造
-import random
-from random import randint, randrange
 import rospy
+import cv2
+from cv_bridge import CvBridge, CvBridgeError
+from sensor_msgs.msg import Image
 from std_msgs.msg import Float32
 import tf
 import os
@@ -13,12 +14,22 @@ import sys
 from blessed import Terminal
 from state.funcs import get_localized_pose
 
+bridge = CvBridge()
+
 def callback(msg):
     global temp
     temp = msg.data
 
+def Imgcallback(image_msg):
+    try:
+        cv_image = bridge.imgmsg_to_cv2(image_msg)
+        cv2.imshow('ROS Image Subscriber', cv_image)
+        cv2.waitKey(10)
+    except CvBridgeError as error:
+        print(error)
+
 def main():
-    rospy.init_node('temp_csv')
+    rospy.init_node('lidar_temp_img_csv')
 
     node_name = rospy.get_name()
     path_to_pkg = rospy.get_param("~path_to_pkg")
@@ -27,6 +38,10 @@ def main():
     rospy.logwarn("%s:  path_to_pkg=%s", node_name, path_to_pkg)
     rospy.logwarn("%s:  file_name=%s", node_name, file_name)
     rospy.logwarn("%s:*---------------------*", node_name)
+
+    print("Subscribe images from topic /image_raw ...")
+    image_subscriber = rospy.Subscriber("image_raw", Image, Imgcallback)
+
     path_to_waypoints = path_to_pkg + '/graphs/' + file_name + '.csv'
     with open(path_to_waypoints, 'w') as csvfile:
         header = ["num", "x", "y", "temp"]
