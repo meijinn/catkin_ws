@@ -9,6 +9,10 @@
         <param name="file_name" value="$(arg file_name)" />
         <param name="path_to_pkg" value="$(find slam_dungeon)" />
     </node>
+    <node if="$(eval select=='temp')" name="temp_csv" pkg="slam_dungeon" type="temp.py" output="screen">
+        <param name="file_name" value="$(arg file_name)" />
+        <param name="path_to_pkg" value="$(find slam_dungeon)" />
+    </node>
     <node if="$(eval select=='clicked_point' or select=='c')" name="clicked_point_csv" pkg="slam_dungeon" type="clicked_point_csv.py" output="screen">
         <param name="file_name" value="$(arg file_name)" />
         <param name="path_to_pkg" value="$(find slam_dungeon)" />

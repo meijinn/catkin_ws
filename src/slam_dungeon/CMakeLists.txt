@@ -46,11 +46,6 @@ target_link_libraries(info_overlay_text_publisher
   ${OpenCV_LIBRARIES}
 )
 
-add_executable(goal_status src/goal_status.cpp)
-target_link_libraries(goal_status
-  ${catkin_LIBRARIES}
-)
-
 add_executable(odometry_listener src/odometry_listener.cpp)
 target_link_libraries(odometry_listener
   ${catkin_LIBRARIES}
