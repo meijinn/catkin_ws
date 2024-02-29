@@ -9,16 +9,8 @@
         <param name="file_name" value="$(arg file_name)" />
         <param name="path_to_pkg" value="$(find slam_dungeon)" />
     </node>
-    <node if="$(eval select=='data')" name="lidar_temp_img_csv" pkg="slam_dungeon" type="lidar_temp_img_csv.py" output="screen">
-        <param name="file_name" value="$(arg file_name)" />
-        <param name="path_to_pkg" value="$(find slam_dungeon)" />
-    </node>
     <node if="$(eval select=='clicked_point' or select=='c')" name="clicked_point_csv" pkg="slam_dungeon" type="clicked_point_csv.py" output="screen">
         <param name="file_name" value="$(arg file_name)" />
-        <param name="path_to_pkg" value="$(find slam_dungeon)" />
-    </node>
-    <node if="$(eval select=='clicked_user' or select=='user')" name="clicked_point_csv" pkg="slam_dungeon" type="clicked_point_csv.py" output="screen">
-        <param name="file_name" value="user" />
         <param name="path_to_pkg" value="$(find slam_dungeon)" />
     </node>
     <node if="$(eval select=='threshold' or select=='t')" name="threshold_csv" pkg="slam_dungeon" type="threshold_csv.py" output="screen">
