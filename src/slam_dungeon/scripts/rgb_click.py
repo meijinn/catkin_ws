@@ -3,7 +3,7 @@ import numpy as np
 
 file_name='./img/1.jpg'
 img=cv2.imread(file_name,cv2.IMREAD_COLOR)
-img=cv2.resize(img,(1000,600))
+
 def click_pos(event, x, y, flags, params):
     if event == cv2.EVENT_LBUTTONDOWN:
         img2=np.copy(img)
