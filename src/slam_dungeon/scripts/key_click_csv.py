@@ -32,7 +32,7 @@ def Imgcallback(image_msg):
         print(error)
 
 def main():
-    rospy.init_node('lidar_temp_img_csv')
+    rospy.init_node('key_click_csv')
 
     node_name = rospy.get_name()
     path_to_pkg = rospy.get_param("~path_to_pkg")
@@ -68,7 +68,7 @@ def main():
                 with open(path_to_waypoints, 'a') as csvfile:
                     filewriter = csv.writer(csvfile, delimiter = ',')
                     filewriter.writerow(waypoint)
-                rospy.loginfo("num : %d, x : %f, y : %f, temp : %f, RGB: %s\n", cnt, x, y, temp, rgb)
+                rospy.loginfo("num : %d, x : %f, y : %f, temp : %f, RGB : %s\n", cnt, x, y, temp, rgb)
                 cnt += 1
             elif k.name == 'KEY_ESCAPE':
                 sys.exit(0)

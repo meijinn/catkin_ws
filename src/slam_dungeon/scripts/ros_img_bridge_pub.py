@@ -7,7 +7,7 @@ from sensor_msgs.msg import Image
 from std_msgs.msg import String
 
 def publish_image():
-    image_pub = rospy.Publisher("image_raw", Image, queue_size=10)
+    image_pub = rospy.Publisher("image_raw", Image, queue_size=1)
     bridge = CvBridge()
     capture = cv2.VideoCapture("/dev/video0")
     width = int(capture.get(cv2.CAP_PROP_FRAME_WIDTH))

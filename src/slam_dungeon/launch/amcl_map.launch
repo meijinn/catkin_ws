@@ -6,7 +6,7 @@
     <param name="/use_sim_time" value="false"/>
     <arg name="map" default="room"/>
     <!--  ************** urg_run ***************  -->
-    <include file="$(find slam_dungeon)/launch/urg_run.launch"/>
+    <!-- <include file="$(find slam_dungeon)/launch/urg_run.launch"/> -->
     <!--  ************** laser_odometry ***************  -->
     <include file="$(find slam_dungeon)/launch/laser_odometry.launch"/>
 
@@ -48,8 +48,13 @@
     </node> -->
 
     <!--  ****************** Tempereture *********************  -->
-    <node pkg="rosserial_python" type="serial_node.py" name="serial_node" output="screen" >
+    <!-- <node pkg="rosserial_python" type="serial_node.py" name="serial_node" output="screen" >
     	<param name="port" value="/dev/ttyACM1"/>
     	<param name="baud" value="57600"/>
-  	</node>
+  	</node> -->
+    <!--  ****************** image_transport *********************  -->
+    <!-- <node name="image_republish" pkg="image_transport" type="republish" args="compressed raw">
+        <remap from="in" to="/image_raw" />
+        <remap from="out" to="/image_exp" />
+    </node> -->
 </launch>
